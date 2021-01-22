@@ -1,6 +1,8 @@
 package com.ecommerce;
 
-import com.ecommerce.kafka.consumer.KafkaConsumerService;
+import com.ecommerce.kafka.consumer.email.ConsumerSendEmail;
+import com.ecommerce.kafka.consumer.fraud.ConsumerFraudDetector;
+import com.ecommerce.kafka.consumer.order.ConsumerCreateOrder;
 import com.ecommerce.kafka.producer.KafkaProducerService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +15,10 @@ public class EcommerceApplication {
 
         KafkaProducerService.execute();
 
-        KafkaConsumerService.execute();
+        ConsumerCreateOrder.execute();
+        ConsumerFraudDetector.execute();
+        ConsumerSendEmail.execute();
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ecommerce.kafka.producer;
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -12,17 +13,29 @@ import java.util.concurrent.ExecutionException;
 public class KafkaProducerService {
 
     public static void execute() {
+
         try (var kafkaProducer = new KafkaProducer<String, String>(getProperties())) {
-            String value = getOrder();
-            var record = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", value, value);
-            kafkaProducer.send(record, (data, ex) -> {
+
+            Callback callback = (data, ex) -> {
                 if (ex == null) {
-                    System.out.println("-----------------------------");
-                    System.out.println("Message sent with success");
-                    System.out.println("Topic: " + data.topic());
-                    System.out.println("Partition:" + data.partition());
+                    System.out.print("### Message sent with success | ");
+                    System.out.print("Topic: " + data.topic());
+                    System.out.print("Partition:" + data.partition());
                 }
-            }).get();
+            };
+
+            final String value = getOrder();
+            var recordCreateOrder = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", value, value);
+            kafkaProducer.send(recordCreateOrder, callback).get();
+
+            final String fraudDetectorReport = getFraudDetectorReport();
+            var recordFraudDetector = new ProducerRecord<>("ECOMMERCE_FRAUD_DETECTOR", fraudDetectorReport, fraudDetectorReport);
+            kafkaProducer.send(recordFraudDetector, callback).get();
+
+            final String email = getEmail();
+            var recordSendEmail = new ProducerRecord<>("ECOMMERCE_SEND_EMAIL", email, email);
+            kafkaProducer.send(recordSendEmail, callback).get();
+
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -30,10 +43,18 @@ public class KafkaProducerService {
     }
 
     private static String getOrder() {
-        String idUser = "01";
-        String idProduct = "000111";
+        String idUser = "01,";
+        String idProduct = "000111,";
         String price = "54,00";
-        return idUser + "," + idProduct + "," + price;
+        return idUser + idProduct + price;
+    }
+
+    private static String getFraudDetectorReport() {
+        return "Fraud Detector analyzer";
+    }
+
+    private static String getEmail() {
+        return "kakfa_cancian@gmail.com";
     }
 
     private static Properties getProperties() {

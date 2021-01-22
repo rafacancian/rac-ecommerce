@@ -1,4 +1,4 @@
-package com.ecommerce.kafka.consumer;
+package com.ecommerce.kafka.consumer.email;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -8,23 +8,27 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-public class KafkaConsumerService {
+public class ConsumerSendEmail {
 
     public static void execute() {
+
         var kafkaConsumer = new KafkaConsumer<String, String>(getProperties());
-        kafkaConsumer.subscribe(Collections.singletonList("ECOMMERCE_NEW_ORDER"));
-        while (true) {
-            var records = kafkaConsumer.poll(Duration.ofSeconds(1));
-            if (!records.isEmpty()) {
-                System.out.println("Register founded");
-                records.forEach(record -> {
-                    System.out.println("----------------------");
-                    System.out.println("Processing new order");
-                    System.out.println(record.key());
-                    System.out.println(record.value());
-                });
+        kafkaConsumer.subscribe(Collections.singletonList("ECOMMERCE_SEND_EMAIL"));
+
+        Thread thread = new Thread(() -> {
+            System.out.println("Thread of ConsumerSendEmail");
+            while (true) {
+                var records = kafkaConsumer.poll(Duration.ofSeconds(1));
+                if (!records.isEmpty()) {
+                    records.forEach(record -> {
+                        System.out.println(">> Email sent with success");
+                        System.out.println(record.key());
+                        System.out.println(record.value());
+                    });
+                }
             }
-        }
+        });
+        thread.start();
     }
 
     private static Properties getProperties() {
@@ -32,8 +36,7 @@ public class KafkaConsumerService {
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9091");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, KafkaConsumerService.class.getSimpleName());
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, ConsumerSendEmail.class.getSimpleName());
         return properties;
-
     }
 }
