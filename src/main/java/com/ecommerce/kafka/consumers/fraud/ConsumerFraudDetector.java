@@ -9,7 +9,8 @@ public class ConsumerFraudDetector {
     }
 
     public static void execute() {
-        ConsumerService consumerService = new ConsumerService("ECOMMERCE_FRAUD_DETECTOR", ConsumerFraudDetector::parse);
+        ConsumerService consumerService = new ConsumerService("ECOMMERCE_FRAUD_DETECTOR",
+                ConsumerFraudDetector.class.getSimpleName(), ConsumerFraudDetector::parse);
         consumerService.execute();
     }
 

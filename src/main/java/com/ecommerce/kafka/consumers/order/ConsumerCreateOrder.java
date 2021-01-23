@@ -9,7 +9,8 @@ public class ConsumerCreateOrder {
     }
 
     public static void execute() {
-        ConsumerService consumerService = new ConsumerService("ECOMMERCE_NEW_ORDER", ConsumerCreateOrder::parse);
+        ConsumerService consumerService = new ConsumerService("ECOMMERCE_NEW_ORDER",
+                ConsumerCreateOrder.class.getSimpleName(), ConsumerCreateOrder::parse);
         consumerService.execute();
     }
 

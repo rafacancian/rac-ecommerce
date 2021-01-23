@@ -9,7 +9,8 @@ public class ConsumerSendEmail {
     }
 
     public static void execute() {
-        ConsumerService consumerService = new ConsumerService("ECOMMERCE_SEND_EMAIL", ConsumerSendEmail::parse);
+        ConsumerService consumerService = new ConsumerService("ECOMMERCE_SEND_EMAIL",
+                ConsumerSendEmail.class.getSimpleName(), ConsumerSendEmail::parse);
         consumerService.execute();
     }
 
