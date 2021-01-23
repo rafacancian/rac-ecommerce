@@ -1,5 +1,9 @@
 package com.ecommerce.kafka.producer;
 
+import com.ecommerce.kafka.adapters.OrderAdapter;
+import com.ecommerce.kafka.adapters.UserAdater;
+import com.ecommerce.kafka.models.Order;
+import com.ecommerce.kafka.models.User;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -24,8 +28,8 @@ public class KafkaProducerService {
                 }
             };
 
-            final String value = getOrder();
-            var recordCreateOrder = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", value, value);
+            final Order order = getOrder();
+            var recordCreateOrder = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", getOrder().getCode(), order.toString());
             kafkaProducer.send(recordCreateOrder, callback).get();
 
             final String fraudDetectorReport = getFraudDetectorReport();
@@ -42,11 +46,12 @@ public class KafkaProducerService {
 
     }
 
-    private static String getOrder() {
-        String idUser = "01,";
-        String idProduct = "000111,";
-        String price = "54,00";
-        return idUser + idProduct + price;
+    private static Order getOrder() {
+        return OrderAdapter.createMock();
+    }
+
+    private static User getUser() {
+        return UserAdater.createMock();
     }
 
     private static String getFraudDetectorReport() {
@@ -54,7 +59,7 @@ public class KafkaProducerService {
     }
 
     private static String getEmail() {
-        return "kakfa_cancian@gmail.com";
+        return getUser().getEmail();
     }
 
     private static Properties getProperties() {

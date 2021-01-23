@@ -1,9 +1,9 @@
 package com.ecommerce;
 
-import com.ecommerce.kafka.consumer.email.ConsumerSendEmail;
-import com.ecommerce.kafka.consumer.fraud.ConsumerFraudDetector;
-import com.ecommerce.kafka.consumer.logger.ConsumerLogger;
-import com.ecommerce.kafka.consumer.order.ConsumerCreateOrder;
+import com.ecommerce.kafka.consumers.email.ConsumerSendEmail;
+import com.ecommerce.kafka.consumers.fraud.ConsumerFraudDetector;
+import com.ecommerce.kafka.consumers.logger.ConsumerLogger;
+import com.ecommerce.kafka.consumers.order.ConsumerCreateOrder;
 import com.ecommerce.kafka.producer.KafkaProducerService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
