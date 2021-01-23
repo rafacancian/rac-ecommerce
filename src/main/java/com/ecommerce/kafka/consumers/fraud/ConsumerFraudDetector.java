@@ -22,8 +22,7 @@ public class ConsumerFraudDetector {
                 if (!records.isEmpty()) {
                     records.forEach(record -> {
                         System.out.println(">> Fraud detector analyzed with success");
-                        System.out.println(record.key());
-                        System.out.println(record.value());
+                        System.out.println("Key: " + record.key() + "| Value:" + record.value());
                     });
                 }
             }

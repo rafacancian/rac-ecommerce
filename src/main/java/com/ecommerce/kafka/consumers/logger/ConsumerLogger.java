@@ -22,7 +22,7 @@ public class ConsumerLogger {
                 if (!records.isEmpty()) {
                     records.forEach(record -> {
                         System.out.println(">> [LOG]: " + record.topic());
-                        System.out.println(record.key() + " | " + record.value());
+                        System.out.println("Key: " + record.key() + "| Value:" + record.value());
                     });
                 }
             }

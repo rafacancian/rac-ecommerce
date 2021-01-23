@@ -23,8 +23,7 @@ public class ConsumerCreateOrder {
                 if (!records.isEmpty()) {
                     records.forEach(record -> {
                         System.out.println(">> Order created with success");
-                        System.out.println(record.key());
-                        System.out.println(record.value());
+                        System.out.println("Key: " + record.key() + "| Value:" + record.value());
                     });
                 }
             }
