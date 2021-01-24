@@ -1,6 +1,7 @@
 package com.ecommerce.kafka.consumers.order;
 
 import com.ecommerce.kafka.consumers.ConsumerService;
+import com.ecommerce.kafka.models.Order;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public class ConsumerCreateOrder {
@@ -9,12 +10,12 @@ public class ConsumerCreateOrder {
     }
 
     public static void execute() {
-        ConsumerService consumerService = new ConsumerService("ECOMMERCE_NEW_ORDER",
+        ConsumerService consumerService = new ConsumerService<Order>("ECOMMERCE_NEW_ORDER",
                 ConsumerCreateOrder.class.getSimpleName(), ConsumerCreateOrder::parse);
         consumerService.execute();
     }
 
-    public static void parse(ConsumerRecord<String, String> record) {
+    public static void parse(ConsumerRecord<String, Order> record) {
         System.out.println(">> Order created with success");
         System.out.println("Key: " + record.key() + "| Value:" + record.value());
     }

@@ -1,6 +1,5 @@
 package com.ecommerce.kafka.consumers;
 
-import lombok.AllArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -10,23 +9,26 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
-@AllArgsConstructor
-public class ConsumerService {
+public class ConsumerService<T> {
 
-    KafkaConsumer<String, String> kafkaConsumer;
-    ConsumerFunction consumerFactory;
+    KafkaConsumer<String, T> kafkaConsumer;
+    private ConsumerFunction consumerFactory;
 
-    public ConsumerService(String topic, String className, ConsumerFunction parse) {
+    public ConsumerService(String className, ConsumerFunction parse) {
         kafkaConsumer = new KafkaConsumer<>(getProperties(className));
         consumerFactory = parse;
+    }
+
+    public ConsumerService(String topic, String className, ConsumerFunction parse) {
+        this(className, parse);
         kafkaConsumer.subscribe(Collections.singletonList(topic));
     }
 
     public ConsumerService(Pattern topic, String className, ConsumerFunction parse) {
-        kafkaConsumer = new KafkaConsumer<>(getProperties(className));
-        consumerFactory = parse;
+        this(className, parse);
         kafkaConsumer.subscribe(topic);
     }
+
 
     public void execute() {
         Thread thread = new Thread(() -> {
