@@ -1,7 +1,10 @@
 package com.ecommerce.kafka.consumers.fraud;
 
 import com.ecommerce.kafka.consumers.ConsumerService;
+import com.ecommerce.kafka.models.Order;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+
+import java.util.Map;
 
 public class ConsumerFraudDetector {
 
@@ -10,11 +13,11 @@ public class ConsumerFraudDetector {
 
     public static void execute() {
         ConsumerService consumerService = new ConsumerService("ECOMMERCE_FRAUD_DETECTOR",
-                ConsumerFraudDetector.class.getSimpleName(), ConsumerFraudDetector::parse);
+                ConsumerFraudDetector.class.getSimpleName(), ConsumerFraudDetector::parse, Order.class, Map.of());
         consumerService.execute();
     }
 
-    public static void parse(ConsumerRecord<String, String> record) {
+    public static void parse(ConsumerRecord<String, Order> record) {
         System.out.println(">> Fraud detector analyzed with success");
         System.out.println("Key: " + record.key() + "| Value:" + record.value());
     }

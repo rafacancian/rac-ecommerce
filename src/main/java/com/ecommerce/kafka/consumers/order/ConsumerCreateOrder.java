@@ -4,6 +4,8 @@ import com.ecommerce.kafka.consumers.ConsumerService;
 import com.ecommerce.kafka.models.Order;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+import java.util.Map;
+
 public class ConsumerCreateOrder {
 
     private ConsumerCreateOrder() {
@@ -11,7 +13,7 @@ public class ConsumerCreateOrder {
 
     public static void execute() {
         ConsumerService consumerService = new ConsumerService<Order>("ECOMMERCE_NEW_ORDER",
-                ConsumerCreateOrder.class.getSimpleName(), ConsumerCreateOrder::parse);
+                ConsumerCreateOrder.class.getSimpleName(), ConsumerCreateOrder::parse, Order.class, Map.of());
         consumerService.execute();
     }
 

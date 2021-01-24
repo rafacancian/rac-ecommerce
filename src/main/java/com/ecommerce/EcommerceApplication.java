@@ -1,5 +1,7 @@
 package com.ecommerce;
 
+import com.ecommerce.kafka.consumers.email.ConsumerSendEmail;
+import com.ecommerce.kafka.consumers.fraud.ConsumerFraudDetector;
 import com.ecommerce.kafka.consumers.logger.ConsumerLogger;
 import com.ecommerce.kafka.consumers.order.ConsumerCreateOrder;
 import com.ecommerce.kafka.producer.KafkaProducerService;
@@ -17,8 +19,8 @@ public class EcommerceApplication {
 
         //CONSUMERS
         ConsumerCreateOrder.execute();
-//        ConsumerFraudDetector.execute();
-//        ConsumerSendEmail.execute();
+        ConsumerFraudDetector.execute();
+        ConsumerSendEmail.execute();
         ConsumerLogger.execute();
 
     }

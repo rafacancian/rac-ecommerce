@@ -9,12 +9,10 @@ import java.io.Serializable;
 @Data
 @Builder
 @AllArgsConstructor
-public class User implements Serializable {
+public class Email implements Serializable {
 
     private String code;
-    private String username;
-    private String fullName;
-    private String address;
-    private String email;
-    private String identifier;
+    private String subject;
+    private String body;
+
 }

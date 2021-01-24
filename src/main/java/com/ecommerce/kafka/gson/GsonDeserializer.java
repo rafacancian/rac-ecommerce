@@ -10,7 +10,7 @@ import java.util.Map;
 @Slf4j
 public class GsonDeserializer<T> implements Deserializer<T> {
 
-    public static final String TYPE_CLASS_CONFIG = "com.ecommerce.kafka.models.type_config";
+    public static String TYPE_CLASS_CONFIG = "";
     private final Gson gson = new GsonBuilder().create();
     Class<T> type;
 
