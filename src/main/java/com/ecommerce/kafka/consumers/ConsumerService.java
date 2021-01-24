@@ -8,6 +8,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 @AllArgsConstructor
 public class ConsumerService {
@@ -19,6 +20,12 @@ public class ConsumerService {
         kafkaConsumer = new KafkaConsumer<>(getProperties(className));
         consumerFactory = parse;
         kafkaConsumer.subscribe(Collections.singletonList(topic));
+    }
+
+    public ConsumerService(Pattern topic, String className, ConsumerFunction parse) {
+        kafkaConsumer = new KafkaConsumer<>(getProperties(className));
+        consumerFactory = parse;
+        kafkaConsumer.subscribe(topic);
     }
 
     public void execute() {

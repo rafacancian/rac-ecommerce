@@ -43,7 +43,6 @@ public class KafkaProducerService {
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     private static Order getOrder() {
