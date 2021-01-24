@@ -1,5 +1,6 @@
 package com.ecommerce.kafka.consumers;
 
+import com.ecommerce.kafka.gson.GsonDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -47,9 +48,10 @@ public class ConsumerService<T> {
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9091");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, GsonDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, className);
         properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
+        properties.setProperty(GsonDeserializer.TYPE_CLASS_CONFIG, String.class.getName());
         return properties;
     }
 }
