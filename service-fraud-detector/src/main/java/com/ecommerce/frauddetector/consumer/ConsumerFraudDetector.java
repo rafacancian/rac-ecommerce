@@ -1,7 +1,7 @@
 package com.ecommerce.frauddetector.consumer;
 
-import com.ecommerce.kafka.consumers.ConsumerService;
-import com.ecommerce.kafka.models.Order;
+import com.ecommerce.consumer.consumers.ConsumerService;
+import com.ecommerce.consumer.models.Order;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.Map;
