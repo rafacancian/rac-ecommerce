@@ -20,33 +20,49 @@ public class KafkaProducerService {
 
     public static void execute() {
 
+        final Order order = OrderAdapter.createMock();
+        final Email email = EmailAdapter.createMock();
+
+        sendOrder(order);
+        sendFraudDetector(order);
+        sendEmail(email);
+    }
+
+    private static void sendOrder(final Order order) {
         try (var kafkaProducerOrder = new KafkaProducer<String, Order>(getProperties())) {
-            try (var kafkaProducerEmail = new KafkaProducer<String, Email>(getProperties())) {
-                try (var kafkaProducerFraudDetector = new KafkaProducer<String, Order>(getProperties())) {
-
-                    Callback callback = (data, ex) -> {
-                        if (ex == null) {
-                            System.out.println("Message sent with success");
-                            System.out.println("Topic: " + data.topic() + " | Partition:" + data.partition());
-                        }
-                    };
-
-                    final Order order = OrderAdapter.createMock();
-                    var recordCreateOrder = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", order.getCode(), order);
-                    kafkaProducerOrder.send(recordCreateOrder, callback).get();
-
-                    var recordFraudDetector = new ProducerRecord<>("ECOMMERCE_FRAUD_DETECTOR", order.getCode(), order);
-                    kafkaProducerFraudDetector.send(recordFraudDetector, callback).get();
-
-                    final Email email = EmailAdapter.createMock();
-                    var recordSendEmail = new ProducerRecord<>("ECOMMERCE_SEND_EMAIL", email.getCode(), email);
-                    kafkaProducerEmail.send(recordSendEmail, callback).get();
-
-                } catch (ExecutionException | InterruptedException ex) {
-                    log.error("Error when try to produce kafka", ex);
-                }
-            }
+            var recordCreateOrder = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", order.getCode(), order);
+            kafkaProducerOrder.send(recordCreateOrder, getCallback()).get();
+        } catch (ExecutionException | InterruptedException ex) {
+            log.error("Error when try to produce kafka", ex);
         }
+    }
+
+    private static void sendFraudDetector(final Order order) {
+        try (var kafkaProducerFraudDetector = new KafkaProducer<String, Order>(getProperties())) {
+            var recordFraudDetector = new ProducerRecord<>("ECOMMERCE_FRAUD_DETECTOR", order.getCode(), order);
+            kafkaProducerFraudDetector.send(recordFraudDetector, getCallback()).get();
+        } catch (ExecutionException | InterruptedException ex) {
+            log.error("Error when try to produce kafka", ex);
+        }
+    }
+
+    private static void sendEmail(final Email email) {
+        try (var kafkaProducerEmail = new KafkaProducer<String, Email>(getProperties())) {
+            var recordSendEmail = new ProducerRecord<>("ECOMMERCE_SEND_EMAIL", email.getCode(), email);
+            kafkaProducerEmail.send(recordSendEmail, getCallback()).get();
+        } catch (ExecutionException | InterruptedException ex) {
+            log.error("Error when try to produce kafka", ex);
+        }
+    }
+
+
+    private static Callback getCallback() {
+        return (data, ex) -> {
+            if (ex == null) {
+                System.out.println("Message sent with success");
+                System.out.println("Topic: " + data.topic() + " | Partition:" + data.partition());
+            }
+        };
     }
 
 
