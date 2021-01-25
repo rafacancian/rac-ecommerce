@@ -20,7 +20,7 @@ public class ConsumerLogger {
         consumerService.execute();
     }
 
-    public static void parse(ConsumerRecord<String, String> record) {
+    public static void parse(final ConsumerRecord<String, String> record) {
         System.out.println(">> [LOG]: " + record.topic());
         System.out.println("Key: " + record.key() + " | Value:" + record.value());
     }

@@ -17,7 +17,7 @@ public class ConsumerSendEmail {
         consumerService.execute();
     }
 
-    public static void parse(ConsumerRecord<String, Email> record) {
+    public static void parse(final ConsumerRecord<String, Email> record) {
         System.out.println(">> Email sent with success");
         System.out.println("Key: " + record.key() + " | Value: " + record.value());
     }

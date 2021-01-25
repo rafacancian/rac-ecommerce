@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 public class Order implements Serializable {
+
     private String code;
     private String name;
     private String description;

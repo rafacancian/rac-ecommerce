@@ -17,7 +17,7 @@ public class ConsumerFraudDetector {
         consumerService.execute();
     }
 
-    public static void parse(ConsumerRecord<String, Order> record) {
+    public static void parse(final ConsumerRecord<String, Order> record) {
         System.out.println(">> Fraud detector analyzed with success");
         System.out.println("Key: " + record.key() + "| Value:" + record.value());
     }

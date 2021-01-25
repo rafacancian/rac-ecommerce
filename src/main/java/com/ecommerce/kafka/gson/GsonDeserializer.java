@@ -12,7 +12,7 @@ public class GsonDeserializer<T> implements Deserializer<T> {
 
     public static String TYPE_CLASS_CONFIG = "";
     private final Gson gson = new GsonBuilder().create();
-    Class<T> type;
+    private Class<T> type;
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
@@ -20,8 +20,8 @@ public class GsonDeserializer<T> implements Deserializer<T> {
         try {
             this.type = (Class<T>) Class.forName(type_config);
         } catch (ClassNotFoundException e) {
-            log.error("GsonDeserializer type {} for deserializer does not exists in the classpath", type_config, e);
-            throw new RuntimeException("GsonDeserializer: type for deserializer does not exists in the classpath" + type_config, e);
+            log.error("Gson deserializer type of {} for deserializer does not exists in the classpath", type_config, e);
+            throw new RuntimeException("Gson deserializer type for deserializer does not exists in the classpath" + type_config, e);
         }
 
     }

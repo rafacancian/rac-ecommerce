@@ -4,5 +4,5 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public interface ConsumerFunction<T> {
 
-    void parse(ConsumerRecord<String, T> record);
+    void parse(final ConsumerRecord<String, T> record);
 }
