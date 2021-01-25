@@ -1,7 +1,7 @@
 package com.ecommerce.email.consumer;
 
-import com.ecommerce.consumer.consumers.ConsumerService;
-import com.ecommerce.consumer.models.Email;
+import com.ecommerce.consumer.ConsumerService;
+import com.ecommerce.email.models.Email;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.Map;

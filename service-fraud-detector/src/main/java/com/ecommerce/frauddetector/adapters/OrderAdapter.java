@@ -16,7 +16,7 @@ public class OrderAdapter {
                 .orderStatus(OrderStatus.CREATED)
                 .creationDate(LocalDate.now())
                 .price(123.99)
-                .user("rafa cancian")
+                .user(UserAdater.createMock())
                 .build();
 
     }

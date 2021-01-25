@@ -1,6 +1,6 @@
 package com.ecommerce.email;
 
-import com.ecommerce.email.producer.KafkaProducerService;
+import com.ecommerce.email.consumer.ConsumerSendEmail;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +10,7 @@ public class ServiceEmailApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServiceEmailApplication.class, args);
 
-        KafkaProducerService.execute();
+        ConsumerSendEmail.execute();
     }
 
 }

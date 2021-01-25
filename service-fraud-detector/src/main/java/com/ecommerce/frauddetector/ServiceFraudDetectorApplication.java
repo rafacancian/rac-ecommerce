@@ -1,6 +1,6 @@
 package com.ecommerce.frauddetector;
 
-import com.ecommerce.frauddetector.producer.KafkaProducerService;
+import com.ecommerce.frauddetector.consumer.ConsumerFraudDetector;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +10,7 @@ public class ServiceFraudDetectorApplication {
     public static void main(String[] args) {
         SpringApplication.run(ServiceFraudDetectorApplication.class, args);
 
-        KafkaProducerService.execute();
+        ConsumerFraudDetector.execute();
     }
 
 }
