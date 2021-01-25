@@ -1,4 +1,4 @@
-package com.ecommerce.serviceemail;
+package com.ecommerce.email;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
