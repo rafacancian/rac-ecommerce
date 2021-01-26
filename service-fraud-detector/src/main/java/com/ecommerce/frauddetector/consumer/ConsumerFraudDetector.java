@@ -25,10 +25,10 @@ public class ConsumerFraudDetector {
         var order = record.value();
         if (ValidateFraud.checkIsFraud(order)) {
             System.out.println("Is Fraud");
-            producerService.send("ECOMMERCE_ORDER_REJECTED", order.getUser().getEmail(), order);
+            producerService.send("ECOMMERCE_ORDER_REJECTED", order.getEmail(), order);
         } else {
             System.out.println("Is not Fraud");
-            producerService.send("ECOMMERCE_ORDER_APPROVED", order.getUser().getEmail(), order);
+            producerService.send("ECOMMERCE_ORDER_APPROVED", order.getEmail(), order);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.ecommerce.applicationmanager.utils;
+package com.ecommerce.utils;
 
 import java.util.Random;
 

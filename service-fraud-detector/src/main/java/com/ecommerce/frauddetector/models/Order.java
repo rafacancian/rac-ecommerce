@@ -18,5 +18,5 @@ public class Order implements Serializable {
     private OrderStatus orderStatus;
     private LocalDate creationDate;
     private Double price;
-    private User user;
+    private String email;
 }
