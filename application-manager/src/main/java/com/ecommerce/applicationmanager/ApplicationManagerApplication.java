@@ -10,7 +10,8 @@ public class ApplicationManagerApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApplicationManagerApplication.class, args);
 
-        KafkaProducerService.execute();
+        KafkaProducerService kafkaProducerService = new KafkaProducerService();
+        kafkaProducerService.execute();
     }
 
 }

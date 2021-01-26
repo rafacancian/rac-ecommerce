@@ -5,91 +5,45 @@ import com.ecommerce.applicationmanager.adapters.EmailAdapter;
 import com.ecommerce.applicationmanager.adapters.OrderAdapter;
 import com.ecommerce.applicationmanager.models.Email;
 import com.ecommerce.applicationmanager.models.Order;
-import com.ecommerce.gson.GsonSerializer;
+import com.ecommerce.producer.ProducerService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.producer.Callback;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.serialization.StringSerializer;
-
-import java.util.Properties;
-import java.util.concurrent.ExecutionException;
 
 @Slf4j
 public class KafkaProducerService {
 
-    public static void execute() {
+    private ProducerService<Order> producerServiceOrder = new ProducerService<>();
+    private ProducerService<Email> producerServiceEmail = new ProducerService<>();
+
+    public void execute() {
 
         final Order order = OrderAdapter.createMock();
         final Email email = EmailAdapter.createMock();
 
-        //Mock to sendo 5 orders
-        // for (int i = 0; i < 5; i++) {
         System.out.println("-----------------------------");
-        System.out.println("Send order");
+        System.out.println("Sending order");
         sendOrder(order);
+        System.out.println("Sending fraud detector");
         sendFraudDetector(order);
+        System.out.println("Sending email");
         sendEmail(email);
-        // System.out.println("Sent order with success");
         System.out.println("-----------------------------");
 
-        // }
     }
 
-    private static void sendOrder(final Order order) {
-        Thread thread = new Thread(() -> {
-            try (var kafkaProducerOrder = new KafkaProducer<String, Order>(getProperties())) {
-                var recordCreateOrder = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", order.getCode(), order);
-                kafkaProducerOrder.send(recordCreateOrder, getCallback()).get();
-            } catch (ExecutionException | InterruptedException ex) {
-                log.error("Error when try to produce kafka", ex);
-            }
-        });
+    private void sendOrder(final Order order) {
+        Thread thread = new Thread(() -> producerServiceOrder.send("ECOMMERCE_NEW_ORDER", order.getCode(), order));
         thread.start();
     }
 
-    private static void sendFraudDetector(final Order order) {
-        Thread thread = new Thread(() -> {
-            try (var kafkaProducerFraudDetector = new KafkaProducer<String, Order>(getProperties())) {
-                var recordFraudDetector = new ProducerRecord<>("ECOMMERCE_FRAUD_DETECTOR", order.getCode(), order);
-                kafkaProducerFraudDetector.send(recordFraudDetector, getCallback()).get();
-            } catch (ExecutionException | InterruptedException ex) {
-                log.error("Error when try to produce kafka", ex);
-            }
-        });
+    private void sendFraudDetector(final Order order) {
+        Thread thread = new Thread(() -> producerServiceOrder.send("ECOMMERCE_FRAUD_DETECTOR", order.getCode(), order));
         thread.start();
     }
 
-    private static void sendEmail(final Email email) {
-        Thread thread = new Thread(() -> {
-            try (var kafkaProducerEmail = new KafkaProducer<String, Email>(getProperties())) {
-                var recordSendEmail = new ProducerRecord<>("ECOMMERCE_SEND_EMAIL", email.getCode(), email);
-                kafkaProducerEmail.send(recordSendEmail, getCallback()).get();
-            } catch (ExecutionException | InterruptedException ex) {
-                log.error("Error when try to produce kafka", ex);
-            }
-        });
+    private void sendEmail(final Email email) {
+        Thread thread = new Thread(() -> producerServiceEmail.send("ECOMMERCE_SEND_EMAIL", email.getCode(), email));
         thread.start();
     }
 
 
-    private static Callback getCallback() {
-        return (data, ex) -> {
-            if (ex == null) {
-                System.out.println("Message sent with success");
-                System.out.println("Topic: " + data.topic() + " | Partition:" + data.partition());
-            }
-        };
-    }
-
-
-    private static Properties getProperties() {
-
-        Properties properties = new Properties();
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9091");
-        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GsonSerializer.class.getName());
-        return properties;
-    }
 }

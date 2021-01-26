@@ -31,7 +31,6 @@ public class ConsumerService<T> {
         kafkaConsumer.subscribe(topic);
     }
 
-
     public void execute() {
         Thread thread = new Thread(() -> {
             while (true) {
