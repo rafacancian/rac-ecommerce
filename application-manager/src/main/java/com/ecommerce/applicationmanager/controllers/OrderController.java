@@ -19,7 +19,7 @@ public class OrderController {
         return ResponseEntity.ok(order);
     }
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<Order> create(@RequestBody final Order order) {
         kafkaServiceOrder.create(order);
         return ResponseEntity.ok(order);

@@ -13,8 +13,7 @@ public class OrderAdapter {
     public static Order createMock() {
         final String id = UUID.randomUUID().toString().substring(0, 15);
         return Order.builder()
-                .code(id)
-                .name("order-" + id)
+                .code("order-" + id)
                 .description("Mock order with the description order-" + id)
                 .orderStatus(OrderStatus.CREATED)
                 .creationDate(LocalDate.now())

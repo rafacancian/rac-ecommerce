@@ -17,7 +17,7 @@ public class KafkaServiceOrder {
     KafkaServiceFraudDetector kafkaServiceFraudDetector = new KafkaServiceFraudDetector();
 
     public Order create(final Order order) {
-        log.info("KafkaServiceOrder: create {}", order.getName());
+        log.info("KafkaServiceOrder: create {}", order.getCode());
         send(order);
         kafkaServiceFraudDetector.send(order);
         KafkaServiceEmail.send(order.getEmail());
@@ -25,7 +25,7 @@ public class KafkaServiceOrder {
     }
 
     private void send(final Order order) {
-        log.info(">> KafkaServiceOrder: send order {} to create new order", order.getName());
+        log.info(">> KafkaServiceOrder: send order {} to create new order", order.getCode());
         Thread thread = new Thread(() -> producerServiceOrder.send("ECOMMERCE_NEW_ORDER", order.getCode(), order));
         thread.start();
     }

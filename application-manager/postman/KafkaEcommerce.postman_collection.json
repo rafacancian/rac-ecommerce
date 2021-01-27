@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "6adc472a-bf61-4ab1-88a8-7a8cb1df5707",
+		"name": "KafkaEcommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\" : \"order-0001\",\r\n    \"description\" : \"description about the order created by postman\",\r\n    \"order_status\" : \"\",\r\n    \"creation_date\" : \"\",\r\n    \"price\" : \"150.00\",\r\n    \"email\" : \"cancian.kafka@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/orders/search?email=cancian.kafka@gmail.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"orders",
+						"search"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "cancian.kafka@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

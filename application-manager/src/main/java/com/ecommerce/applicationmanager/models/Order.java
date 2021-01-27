@@ -13,7 +13,6 @@ import java.time.LocalDate;
 public class Order implements Serializable {
 
     private String code;
-    private String name;
     private String description;
     private OrderStatus orderStatus;
     private LocalDate creationDate;
