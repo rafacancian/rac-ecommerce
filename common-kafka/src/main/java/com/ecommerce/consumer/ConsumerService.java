@@ -43,7 +43,6 @@ public class ConsumerService<T> {
         thread.start();
     }
 
-
     private Properties getProperties(final String className, final Class<T> classType, final Map<String, String> propertiesOverride) {
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9091");
