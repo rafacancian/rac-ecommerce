@@ -67,12 +67,14 @@ genericas de kafa para produzir e consumir mensagerias**
 
 ## Steps to run
 1. Run Kafka server 
-
-The docker compose contains the kafka server and Zookeeper server.
-
- ```docker-compose up -d```
-
-2. Run others projects
+> The docker compose contains the kafka and Zookeeper server. 
+> ```docker-compose up -d```
+2. Run service-order
+3. Run service-user
+4. Run service logger
+5. Run service-email
+6. Run service-fraud-detector
+7. Run service-reporting
 
 ---
 
@@ -102,7 +104,6 @@ docker run -p <external-port>:<internal-port> --name <container-name> --network 
 - :heavy_check_mark: ~~kafka common~~ 
 - :ballot_box_with_check: update readme
 
----
 
 [Java]: https://www.java.com/pt-BR/    
 [spring boot]: https://spring.io/projects/spring-boot
