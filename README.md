@@ -1,6 +1,5 @@
 # RAC Ecommerce
 
-
 <p align="center">
   <a href="https://github.com/rafacancian/java-kafka-ecommerce">
     <img width="50px" src="https://raw.githubusercontent.com/rafacancian/java-kafka-ecommerce/pictures/helper/layouts/rac-ecommerce-logo.png" alt="RAC Ecommerce Logo">
@@ -53,7 +52,7 @@ genericas de kafa para produzir e consumir mensagerias**
 - [Spring Cloud]: providing both authentication and authorization 
   - [Feign]: for external server communications
 - [Kafka]: Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
-- [Zookeeper]: 
+- [Zookeeper]: centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services
 - [Lombok]: Annotations helper library
 - [H2]: A very fast database embedded for tests
 - [Swagger]: Swagger open source and pro tools have helped millions of API developers, teams, and organizations deliver great APIs.
@@ -75,58 +74,44 @@ Command: ```docker-compose up -d```
 
 ---
 
-## Postman Collection
-- [Postman collection][postman-file]
-
-
-## Docker compose
-Kafka e Zool
+## Docker Compose
+Kafka e Zookeeper
 link reference: https://itnext.io/how-to-install-kafka-using-docker-a2b7c746cbdc
-
 ```
  Coomand: 
+docker-compose up -d
+docker logs -f <container-id>
+docker run -p <external-port>:<internal-port> --name <container-name> --network <network-name> <image-name:tag>
 ```
+
+---
+
+## Postman Collection
+- [Postman collection][postman-file]
 
 ## Swagger
 - The generated swagger html page is available in the following address
 ```
     http://localhost:8080/swagger-ui/index.html
 ```
-## DockerFiles
 
-### 1. Create network
-```
-docker network create b3invest-network
-```
-
-### 2. Config Server
-```
-mvnw clean package -DskipTests
-docker build -t b3invest-configserver:v1 .
-docker run -p 8888:8888 --name b3invest-configserver --network b3invest-network -e GITHUB_USER=rafacancian -e GITHUB_PASS=? b3invest-configserver:v1
-```
-
-### Utils commands
-```
-docker logs -f <container-id>
-docker run -p <external-port>:<internal-port> --name <container-name> --network <network-name> <image-name:tag>
-```
-
-
+---
 ## TODO
 
 - :heavy_check_mark: ~~kafka common~~ 
 - :ballot_box_with_check: update readme
+
+---
 
 [Java]: https://www.java.com/pt-BR/    
 [spring boot]: https://spring.io/projects/spring-boot
 [spring cloud]: https://spring.io/projects/spring-cloud
 [feign]: https://github.com/OpenFeign/feign
 [kafka]: https://kafka.apache.org/
-[Zookeeper]: 
+[Zookeeper]: https://zookeeper.apache.org/
 [lombok]: https://github.com/rzwitserloot/lombok
 [h2]: http://h2database.com/html/main.html
 [Swagger]: https://swagger.io/
 [docker]: https://www.docker.com/
-[postman-file]: #
+[postman-file]: https://github.com/rafacancian/java-kafka-ecommerce/tree/main/application-manager/postman
 
