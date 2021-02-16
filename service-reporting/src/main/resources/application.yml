@@ -1,0 +1,6 @@
+server:
+  port: 8096
+
+spring:
+  devtools:
+    add-properties: false

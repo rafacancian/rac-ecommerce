@@ -1,0 +1,12 @@
+=====================================================
+MONTHLY REPORT
+=====================================================
+
+HEADER
+Basic information
+
+CONTENT
+Data information report generate for service-report
+
+FOOTER
+Footer report pag1 of 1
