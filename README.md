@@ -67,8 +67,10 @@ genericas de kafa para produzir e consumir mensagerias**
 
 ## Steps to run
 1. Run Kafka server 
+
 The docker compose contains the kafka server and Zookeeper server.
-Command: ```docker-compose up -d```
+
+ ```docker-compose up -d```
 
 2. Run others projects
 
@@ -78,7 +80,6 @@ Command: ```docker-compose up -d```
 Kafka e Zookeeper
 link reference: https://itnext.io/how-to-install-kafka-using-docker-a2b7c746cbdc
 ```
- Coomand: 
 docker-compose up -d
 docker logs -f <container-id>
 docker run -p <external-port>:<internal-port> --name <container-name> --network <network-name> <image-name:tag>
