@@ -49,7 +49,7 @@ genericas de kafa para produzir e consumir mensagerias**
 ## System Technologies
 - [Java]: Java 12 
 - [Spring Boot]: Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run"
-- [Spring Cloud]: providing both authentication and authorization 
+- [Spring Cloud]: Spring Cloud provides tools for developers to quickly build some of the common patterns in distributed systems 
   - [Feign]: for external server communications
 - [Kafka]: Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 - [Zookeeper]: centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services
