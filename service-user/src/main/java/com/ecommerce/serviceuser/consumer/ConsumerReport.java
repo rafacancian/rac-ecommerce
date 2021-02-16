@@ -8,33 +8,34 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
-public class ConsumerUserCheck {
+public class ConsumerReport {
 
     private UserService userService = new UserService();
 
     private ProducerService<User> producerService = new ProducerService<>();
 
     public void execute() {
-        ConsumerService consumerService = new ConsumerService<String>("ECOMMERCE_USER_CHECK",
-                ConsumerUserCheck.class.getSimpleName(), this::parse, String.class, Map.of());
+        ConsumerService consumerService = new ConsumerService<String>("SEND_MESSAGE_ALL_USERS",
+                ConsumerReport.class.getSimpleName(), this::parse, String.class, Map.of());
         consumerService.execute();
     }
 
     public void parse(ConsumerRecord<String, String> record) {
-        System.out.println(">> Find user returned");
+        System.out.println(">> Processing batch send message all users");
         System.out.println("Key: " + record.key() + "| Value:" + record.value());
-        User user = userService.findUserByEmail(record.value());
+        List<User> users = userService.findAllUsers();
 
-        if (ObjectUtils.isEmpty(user)) {
-            System.out.println("User not allow to create an order");
-            producerService.send("ECOMMERCE_USER_APPROVED", user.getEmail(), user);
-        } else {
-            System.out.println("User allow to create an order");
-            producerService.send("ECOMMERCE_USER_REJECTED", user.getEmail(), user);
+        if (!ObjectUtils.isEmpty(users)) {
+            System.out.println("Numbers of user founded: " + users.size());
+            for (User user : users) {
+                producerService.send(record.value(), user.getEmail(), user);
+            }
         }
     }
+
 
 }
