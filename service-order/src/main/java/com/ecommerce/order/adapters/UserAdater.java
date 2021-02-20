@@ -1,6 +1,6 @@
 package com.ecommerce.order.adapters;
 
-import com.ecommerce.order.models.User;
+import com.ecommerce.model.User;
 
 import java.util.UUID;
 
@@ -13,7 +13,7 @@ public class UserAdater {
                 .fullName("Rafael Cancian")
                 .address("Rua 1 de maio - Parque das nacoes - Lisboa")
                 .email("kafka.cancian@gmail.com")
-                .identifier("111.222.333-45")
+                .cpf("111.222.333-45")
                 .build();
     }
 }

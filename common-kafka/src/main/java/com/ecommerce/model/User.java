@@ -1,4 +1,4 @@
-package com.ecommerce.order.models;
+package com.ecommerce.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +16,9 @@ public class User implements Serializable {
     private String fullName;
     private String address;
     private String email;
-    private String identifier;
+    private String cpf;
+
+    public String getReportPath() {
+        return "target/" + code + "report.txt";
+    }
 }

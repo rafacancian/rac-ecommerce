@@ -1,8 +1,9 @@
 package com.ecommerce.servicereporting.consumer;
 
 import com.ecommerce.consumer.ConsumerService;
+import com.ecommerce.model.Message;
+import com.ecommerce.model.User;
 import com.ecommerce.producer.ProducerService;
-import com.ecommerce.servicereporting.models.User;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.io.File;
@@ -17,16 +18,16 @@ public class ReadingReportDetector {
     final static Path SOURCE = new File("src/main/resources/report.txt").toPath();
 
     public void execute() {
-        ConsumerService consumerService = new ConsumerService("USER_GENERATE_REPORTS",
+        ConsumerService consumerService = new ConsumerService("ECOMMERCE_USER_GENERATE_REPORTS",
                 ReadingReportDetector.class.getSimpleName(), this::parse, User.class, Map.of());
         consumerService.execute();
     }
 
-    public void parse(final ConsumerRecord<String, User> record) {
+    public void parse(final ConsumerRecord<String, Message<User>> record) {
         System.out.println(">> Processing report for");
         System.out.println("Key: " + record.key() + " | Value: " + record.value());
 
-        User user = record.value();
+        User user = record.value().getPayload();
         var target = new File(user.getReportPath());
         IO.copyTo(SOURCE, target);
         IO.append(target, "Created for " + user.getFullName() + " in " + LocalDate.now());

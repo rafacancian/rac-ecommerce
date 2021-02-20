@@ -1,7 +1,7 @@
 package com.ecommerce.serviceuser.services;
 
+import com.ecommerce.model.User;
 import com.ecommerce.serviceuser.adapters.UserAdater;
-import com.ecommerce.serviceuser.models.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

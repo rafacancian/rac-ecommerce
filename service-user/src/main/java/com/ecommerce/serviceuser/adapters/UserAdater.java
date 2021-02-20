@@ -1,7 +1,7 @@
 package com.ecommerce.serviceuser.adapters;
 
 
-import com.ecommerce.serviceuser.models.User;
+import com.ecommerce.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
