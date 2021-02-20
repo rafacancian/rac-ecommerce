@@ -1,6 +1,7 @@
 package com.ecommerce.consumer;
 
-import com.ecommerce.gson.GsonDeserializer;
+import com.ecommerce.gson.MessageDeserializer;
+import com.ecommerce.model.Message;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -13,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class ConsumerService<T> {
 
-    private KafkaConsumer<String, T> kafkaConsumer;
+    private KafkaConsumer<String, Message<T>> kafkaConsumer;
     private ConsumerFunction consumerFactory;
 
     private ConsumerService(final String className, final ConsumerFunction parse, final Class<T> classType, final Map<String, String> propertiesOverride) {
@@ -47,10 +48,10 @@ public class ConsumerService<T> {
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9091");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, GsonDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, MessageDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, className);
         properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
-        properties.setProperty(GsonDeserializer.TYPE_CLASS_CONFIG, classType.getName());
+        //properties.setProperty(GsonDeserializer.TYPE_CLASS_CONFIG, classType.getName());
         properties.putAll(propertiesOverride);
         return properties;
     }
