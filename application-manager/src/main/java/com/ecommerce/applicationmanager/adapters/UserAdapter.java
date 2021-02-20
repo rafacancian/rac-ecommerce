@@ -4,7 +4,7 @@ import com.ecommerce.model.User;
 
 import java.util.UUID;
 
-public class UserAdater {
+public class UserAdapter {
 
     public static User createMock() {
         return User.builder()

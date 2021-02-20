@@ -1,7 +1,7 @@
 package com.ecommerce.applicationmanager.controllers;
 
-import com.ecommerce.applicationmanager.models.Order;
 import com.ecommerce.applicationmanager.services.KafkaServiceOrder;
+import com.ecommerce.model.Order;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

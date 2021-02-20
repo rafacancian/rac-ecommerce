@@ -1,8 +1,8 @@
 package com.ecommerce.applicationmanager.adapters;
 
 
-import com.ecommerce.applicationmanager.models.Order;
-import com.ecommerce.applicationmanager.models.OrderStatus;
+import com.ecommerce.model.Order;
+import com.ecommerce.model.OrderStatus;
 import com.ecommerce.utils.GenerateRandomNumber;
 
 import java.time.LocalDate;

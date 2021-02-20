@@ -1,7 +1,7 @@
 package com.ecommerce.order.adapters;
 
-import com.ecommerce.order.models.Order;
-import com.ecommerce.order.models.OrderStatus;
+import com.ecommerce.model.Order;
+import com.ecommerce.model.OrderStatus;
 
 import java.time.LocalDate;
 import java.util.UUID;

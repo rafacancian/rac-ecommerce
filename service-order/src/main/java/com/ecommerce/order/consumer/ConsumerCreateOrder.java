@@ -1,6 +1,7 @@
 package com.ecommerce.order.consumer;
 
 import com.ecommerce.consumer.ConsumerService;
+import com.ecommerce.model.Message;
 import com.ecommerce.model.Order;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -17,7 +18,7 @@ public class ConsumerCreateOrder {
         consumerService.execute();
     }
 
-    public static void parse(ConsumerRecord<String, Order> record) {
+    public static void parse(ConsumerRecord<String, Message<Order>> record) {
         System.out.println(">> Order created with success");
         System.out.println("Key: " + record.key() + "| Value:" + record.value());
     }

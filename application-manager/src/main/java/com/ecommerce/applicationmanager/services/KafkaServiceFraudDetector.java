@@ -1,6 +1,6 @@
 package com.ecommerce.applicationmanager.services;
 
-import com.ecommerce.applicationmanager.models.Order;
+import com.ecommerce.model.Order;
 import com.ecommerce.producer.ProducerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
