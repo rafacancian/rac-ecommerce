@@ -1,4 +1,4 @@
-package com.ecommerce.email.models;
+package com.ecommerce.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
