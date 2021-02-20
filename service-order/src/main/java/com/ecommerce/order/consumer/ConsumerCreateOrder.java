@@ -1,7 +1,7 @@
 package com.ecommerce.order.consumer;
 
 import com.ecommerce.consumer.ConsumerService;
-import com.ecommerce.order.models.Order;
+import com.ecommerce.model.Order;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.Map;
