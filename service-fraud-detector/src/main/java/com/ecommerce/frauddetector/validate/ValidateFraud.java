@@ -1,6 +1,6 @@
 package com.ecommerce.frauddetector.validate;
 
-import com.ecommerce.frauddetector.models.Order;
+import com.ecommerce.model.Order;
 
 public class ValidateFraud {
 
