@@ -1,8 +1,9 @@
 package com.ecommerce.frauddetector.consumer;
 
 import com.ecommerce.consumer.ConsumerService;
-import com.ecommerce.frauddetector.models.Order;
 import com.ecommerce.frauddetector.validate.ValidateFraud;
+import com.ecommerce.model.Message;
+import com.ecommerce.model.Order;
 import com.ecommerce.producer.ProducerService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -18,11 +19,11 @@ public class ConsumerFraudDetector {
         consumerService.execute();
     }
 
-    public void parse(final ConsumerRecord<String, Order> record) {
+    public void parse(final ConsumerRecord<String, Message<Order>> record) {
         System.out.println(">> Fraud detector analyzed with success");
         System.out.println("Key: " + record.key() + "| Value:" + record.value());
 
-        var order = record.value();
+        var order = record.value().getPayload();
         if (ValidateFraud.checkIsFraud(order)) {
             System.out.println("Is Fraud");
             producerService.send("ECOMMERCE_ORDER_REJECTED", order.getEmail(), order);
