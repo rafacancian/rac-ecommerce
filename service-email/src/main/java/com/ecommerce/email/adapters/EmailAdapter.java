@@ -1,7 +1,6 @@
 package com.ecommerce.email.adapters;
 
-
-import com.ecommerce.email.models.Email;
+import com.ecommerce.model.Email;
 
 import java.util.UUID;
 
