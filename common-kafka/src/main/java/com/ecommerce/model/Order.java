@@ -1,4 +1,4 @@
-package com.ecommerce.order.models;
+package com.ecommerce.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,5 +18,5 @@ public class Order implements Serializable {
     private OrderStatus orderStatus;
     private LocalDate creationDate;
     private Double price;
-    private User user;
+    private String email;
 }

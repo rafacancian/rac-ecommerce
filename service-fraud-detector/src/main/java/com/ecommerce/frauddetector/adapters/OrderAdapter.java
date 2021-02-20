@@ -1,7 +1,7 @@
 package com.ecommerce.frauddetector.adapters;
 
-import com.ecommerce.frauddetector.models.Order;
-import com.ecommerce.frauddetector.models.OrderStatus;
+import com.ecommerce.model.Order;
+import com.ecommerce.model.OrderStatus;
 import com.ecommerce.utils.GenerateRandomNumber;
 
 import java.time.LocalDate;
