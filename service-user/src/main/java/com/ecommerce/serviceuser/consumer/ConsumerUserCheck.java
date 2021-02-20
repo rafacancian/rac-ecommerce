@@ -1,8 +1,9 @@
 package com.ecommerce.serviceuser.consumer;
 
 import com.ecommerce.consumer.ConsumerService;
+import com.ecommerce.model.Message;
+import com.ecommerce.model.User;
 import com.ecommerce.producer.ProducerService;
-import com.ecommerce.serviceuser.models.User;
 import com.ecommerce.serviceuser.services.UserService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,10 @@ public class ConsumerUserCheck {
         consumerService.execute();
     }
 
-    public void parse(ConsumerRecord<String, String> record) {
+    public void parse(ConsumerRecord<String, Message<String>> record) {
         System.out.println(">> Find user returned");
         System.out.println("Key: " + record.key() + "| Value:" + record.value());
-        User user = userService.findUserByEmail(record.value());
+        User user = userService.findUserByEmail(record.value().getPayload());
 
         if (ObjectUtils.isEmpty(user)) {
             System.out.println("User not allow to create an order");
