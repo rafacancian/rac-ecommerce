@@ -1,7 +1,7 @@
 package com.ecommerce.applicationmanager.services;
 
 import com.ecommerce.applicationmanager.adapters.EmailAdapter;
-import com.ecommerce.applicationmanager.models.Email;
+import com.ecommerce.model.Email;
 import com.ecommerce.producer.ProducerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class KafkaServiceEmail {
 
     private ProducerService<Email> producerServiceEmail = new ProducerService<>();
-
 
     public void send(final String subject) {
         final Email email = EmailAdapter.createMock(subject);
