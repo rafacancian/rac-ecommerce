@@ -13,7 +13,7 @@ public class KafkaServiceFraudDetector {
 
     public void send(final Order order) {
         log.info(">> KafkaServiceOrder: send order {} to fraud detector", order.getCode());
-        Thread thread = new Thread(() -> producerService.send("ECOMMERCE_FRAUD_DETECTOR", order.getCode(), order));
+        Thread thread = new Thread(() -> producerService.sendAsync("ECOMMERCE_FRAUD_DETECTOR", order.getCode(), order));
         thread.start();
     }
 

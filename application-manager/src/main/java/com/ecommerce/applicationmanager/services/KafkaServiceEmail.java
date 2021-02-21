@@ -15,7 +15,7 @@ public class KafkaServiceEmail {
     public void send(final String subject) {
         final Email email = EmailAdapter.createMock(subject);
         log.info(">> KafkaServiceEmail: send email {} to email service", email.getSubject());
-        Thread thread = new Thread(() -> producerServiceEmail.send("ECOMMERCE_SEND_EMAIL", email.getCode(), email));
+        Thread thread = new Thread(() -> producerServiceEmail.sendAsync("ECOMMERCE_SEND_EMAIL", email.getCode(), email));
         thread.start();
     }
 

@@ -18,7 +18,7 @@ public class KafkaServiceReport {
 
     private void send() {
         log.info(">> KafkaServiceReport: send generate reports");
-        Thread thread = new Thread(() -> producerServiceBatch.send("ECOMMERCE_SEND_MESSAGE_ALL_USERS", "ECOMMERCE_USER_GENERATE_REPORTS", "ECOMMERCE_USER_GENERATE_REPORTS"));
+        Thread thread = new Thread(() -> producerServiceBatch.sendAsync("ECOMMERCE_SEND_MESSAGE_ALL_USERS", "ECOMMERCE_USER_GENERATE_REPORTS", "ECOMMERCE_USER_GENERATE_REPORTS"));
         thread.start();
     }
 
