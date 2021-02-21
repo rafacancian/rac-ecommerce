@@ -4,14 +4,13 @@ import com.ecommerce.gson.MessageSerializer;
 import com.ecommerce.model.Correlate;
 import com.ecommerce.model.Message;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.producer.Callback;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.stereotype.Service;
 
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @Slf4j
 @Service
@@ -23,10 +22,15 @@ public class ProducerService<T> {
         this.kafkaProducer = new KafkaProducer<>(getProperties());
     }
 
-    public void send(String topic, String key, T payload) {
+    public Future<RecordMetadata> sendAsync(String topic, String key, T payload) {
         var value = new Message<>(new Correlate(payload.getClass().getSimpleName()), payload);
         var producerRecord = new ProducerRecord<>(topic, key, value);
-        kafkaProducer.send(producerRecord, getCallback());
+        return kafkaProducer.send(producerRecord, getCallback());
+    }
+
+    public void sendSync(String topic, String key, T payload) throws ExecutionException, InterruptedException {
+        Future<RecordMetadata> future = sendAsync(topic, key, payload);
+        future.get();
     }
 
     private static Callback getCallback() {
