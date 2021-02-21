@@ -14,7 +14,7 @@ public class ConsumerCreateOrder {
 
     public static void execute() {
         ConsumerService consumerService = new ConsumerService<Order>("ECOMMERCE_NEW_ORDER",
-                ConsumerCreateOrder.class.getSimpleName(), ConsumerCreateOrder::parse, Order.class, Map.of());
+                ConsumerCreateOrder.class.getSimpleName(), ConsumerCreateOrder::parse, Map.of());
         consumerService.execute();
     }
 

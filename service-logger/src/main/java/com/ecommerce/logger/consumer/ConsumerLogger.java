@@ -16,7 +16,7 @@ public class ConsumerLogger {
 
     public static void execute() {
         ConsumerService consumerService = new ConsumerService(Pattern.compile("ECOMMERCE.*"),
-                ConsumerLogger.class.getSimpleName(), ConsumerLogger::parse, String.class,
+                ConsumerLogger.class.getSimpleName(), ConsumerLogger::parse,
                 Map.of(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName()));
         consumerService.execute();
     }

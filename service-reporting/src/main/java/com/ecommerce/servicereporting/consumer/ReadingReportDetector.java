@@ -19,7 +19,7 @@ public class ReadingReportDetector {
 
     public void execute() {
         ConsumerService consumerService = new ConsumerService("ECOMMERCE_USER_GENERATE_REPORTS",
-                ReadingReportDetector.class.getSimpleName(), this::parse, User.class, Map.of());
+                ReadingReportDetector.class.getSimpleName(), this::parse, Map.of());
         consumerService.execute();
     }
 

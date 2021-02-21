@@ -21,7 +21,7 @@ public class ConsumerReport {
 
     public void execute() {
         ConsumerService consumerService = new ConsumerService<String>("ECOMMERCE_SEND_MESSAGE_ALL_USERS",
-                ConsumerReport.class.getSimpleName(), this::parse, String.class, Map.of());
+                ConsumerReport.class.getSimpleName(), this::parse, Map.of());
         consumerService.execute();
     }
 
@@ -33,7 +33,7 @@ public class ConsumerReport {
         if (!ObjectUtils.isEmpty(users)) {
             System.out.println("Numbers of user founded: " + users.size());
             for (User user : users) {
-                producerService.send(record.value().getPayload(), user.getEmail(), user);
+                producerService.sendAsync(record.value().getPayload(), user.getEmail(), user);
             }
         }
     }

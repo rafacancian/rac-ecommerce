@@ -20,7 +20,7 @@ public class ConsumerUserCheck {
 
     public void execute() {
         ConsumerService consumerService = new ConsumerService<String>("ECOMMERCE_USER_CHECK",
-                ConsumerUserCheck.class.getSimpleName(), this::parse, String.class, Map.of());
+                ConsumerUserCheck.class.getSimpleName(), this::parse, Map.of());
         consumerService.execute();
     }
 
@@ -30,11 +30,11 @@ public class ConsumerUserCheck {
         User user = userService.findUserByEmail(record.value().getPayload());
 
         if (ObjectUtils.isEmpty(user)) {
-            System.out.println("User not allow to create an order");
-            producerService.send("ECOMMERCE_USER_APPROVED", user.getEmail(), user);
+            System.out.println("User reject to create an order");
+            producerService.sendAsync("ECOMMERCE_USER_REJECTED", user.getEmail(), user);
         } else {
             System.out.println("User allow to create an order");
-            producerService.send("ECOMMERCE_USER_REJECTED", user.getEmail(), user);
+            producerService.sendAsync("ECOMMERCE_USER_APPROVED", user.getEmail(), user);
         }
     }
 

@@ -15,7 +15,7 @@ public class ConsumerFraudDetector {
 
     public void execute() {
         ConsumerService consumerService = new ConsumerService("ECOMMERCE_FRAUD_DETECTOR",
-                ConsumerFraudDetector.class.getSimpleName(), this::parse, Order.class, Map.of());
+                ConsumerFraudDetector.class.getSimpleName(), this::parse, Map.of());
         consumerService.execute();
     }
 
@@ -26,10 +26,10 @@ public class ConsumerFraudDetector {
         var order = record.value().getPayload();
         if (ValidateFraud.checkIsFraud(order)) {
             System.out.println("Is Fraud");
-            producerService.send("ECOMMERCE_ORDER_REJECTED", order.getEmail(), order);
+            producerService.sendAsync("ECOMMERCE_ORDER_REJECTED", order.getEmail(), order);
         } else {
             System.out.println("Is not Fraud");
-            producerService.send("ECOMMERCE_ORDER_APPROVED", order.getEmail(), order);
+            producerService.sendAsync("ECOMMERCE_ORDER_APPROVED", order.getEmail(), order);
         }
     }
 

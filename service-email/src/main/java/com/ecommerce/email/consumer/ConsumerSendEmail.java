@@ -14,7 +14,7 @@ public class ConsumerSendEmail {
 
     public static void execute() {
         ConsumerService consumerService = new ConsumerService("ECOMMERCE_SEND_EMAIL",
-                ConsumerSendEmail.class.getSimpleName(), ConsumerSendEmail::parse, Email.class, Map.of());
+                ConsumerSendEmail.class.getSimpleName(), ConsumerSendEmail::parse, Map.of());
         consumerService.execute();
     }
 
