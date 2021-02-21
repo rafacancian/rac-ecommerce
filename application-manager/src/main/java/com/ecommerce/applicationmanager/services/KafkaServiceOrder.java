@@ -15,11 +15,13 @@ public class KafkaServiceOrder {
 
     KafkaServiceEmail KafkaServiceEmail = new KafkaServiceEmail();
     KafkaServiceFraudDetector kafkaServiceFraudDetector = new KafkaServiceFraudDetector();
+    KafkaServiceUser kafkaServiceUser = new KafkaServiceUser();
 
     public Order create(final Order order) {
         log.info("KafkaServiceOrder: create {}", order.getCode());
         send(order);
         kafkaServiceFraudDetector.send(order);
+        kafkaServiceUser.send(order.getEmail());
         KafkaServiceEmail.send(order.getEmail());
         return order;
     }
