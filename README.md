@@ -53,6 +53,7 @@ genericas de kafa para produzir e consumir mensagerias**
   - [Feign]: for external server communications
 - [Kafka]: Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
 - [Zookeeper]: centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services
+- [Kafdrop]: Kafdrop is a web UI for viewing Kafka topics and browsing consumer groups. The tool displays information such as brokers, topics, partitions, consumers, and lets you view messages. 
 - [Lombok]: Annotations helper library
 - [H2]: A very fast database embedded for tests
 - [Swagger]: Swagger open source and pro tools have helped millions of API developers, teams, and organizations deliver great APIs.
@@ -80,17 +81,29 @@ genericas de kafa para produzir e consumir mensagerias**
 
 ## Docker Compose
 Kafka e Zookeeper
-link reference: https://itnext.io/how-to-install-kafka-using-docker-a2b7c746cbdc
+
+links reference: 
+
+- https://itnext.io/how-to-install-kafka-using-docker-a2b7c746cbdc
+
+- https://medium.com/better-programming/a-simple-apache-kafka-cluster-with-docker-kafdrop-and-python-cf45ab99e2b9
 ```
 docker-compose up -d
 docker logs -f <container-id>
 docker run -p <external-port>:<internal-port> --name <container-name> --network <network-name> <image-name:tag>
+docker-compose down
 ```
 
 ---
 
 ## Postman Collection
 - [Postman collection][postman-file]
+
+
+## Kafdrop
+Dashboard for viewing Kafka topics and browsing consumer groups
+```http://localhost:9000/```
+
 
 ## Swagger
 - The generated swagger html page is available in the following address
@@ -111,6 +124,7 @@ docker run -p <external-port>:<internal-port> --name <container-name> --network 
 [feign]: https://github.com/OpenFeign/feign
 [kafka]: https://kafka.apache.org/
 [Zookeeper]: https://zookeeper.apache.org/
+[Kafdrop]: https://github.com/obsidiandynamics/kafdrop 
 [lombok]: https://github.com/rzwitserloot/lombok
 [h2]: http://h2database.com/html/main.html
 [Swagger]: https://swagger.io/
