@@ -13,7 +13,7 @@ public class KafkaServiceUser {
 
     public void send(final String email) {
         log.info(">> KafkaServiceUser: send user {} to validate user", email);
-        Thread thread = new Thread(() -> producerServiceUser.send("ECOMMERCE_USER_CHECK", email, email));
+        Thread thread = new Thread(() -> producerServiceUser.sendAsync("ECOMMERCE_USER_CHECK", email, email));
         thread.start();
     }
 
