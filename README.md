@@ -71,7 +71,7 @@ Modulo responsavel por centralizar os logs de todos os microserviçoes
 
 ## Architecture Design
 
-![TODO](https://raw.githubusercontent.com/rafacancian/java-kafka-ecommerce/pictures/helper/architecture/architecture.png)
+// TODO
 
 ---
 
@@ -104,25 +104,23 @@ docker-compose down
 
 ## Postman Collection
 
-- [Postman collection][postman-file]
+Postman collection para realizar testes <br>
+[Postman collection][postman-file]
 
 ## Kafdrop
 
-Dashboard for viewing Kafka topics and browsing consumer groups
-> http://localhost:9000
+Dashboard for viewing Kafka topics and browsing consumer groups. <br>
+http://localhost:9000
 
 ## Swagger
 
-- The generated swagger html page is available in the following address
-
-> http://localhost:8080/swagger-ui/index.html
+The generated swagger html page is available in the following address<br>
+http://localhost:8080/swagger-ui/index.html
 
 ### Links de referencia
 
-> 1. https://itnext.io/how-to-install-kafka-using-docker-a2b7c746cbdc
->
->
-> 2. https://medium.com/better-programming/a-simple-apache-kafka-cluster-with-docker-kafdrop-and-python-cf45ab99e2b9
+1. https://itnext.io/how-to-install-kafka-using-docker-a2b7c746cbdc
+2. https://medium.com/better-programming/a-simple-apache-kafka-cluster-with-docker-kafdrop-and-python-cf45ab99e2b9
 
 [Java]: https://www.java.com/pt-BR/
 
